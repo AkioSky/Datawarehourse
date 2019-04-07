@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="{% static 'jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <form action="" method="get" class="flex-container" style="justify-content: flex-start">
+    {% for field in form %}
+        {{ field }}
+    {% endfor %}
+        <button class="btn">Submit</button>
+    </form>
+{% if graph %}
+    <div class="section">
+        {{ graph|safe }}
+    </div>
+{% endif %}
+    <div class="section mt-5">
+    {% if stocks %}
+        {{ stocks | safe }}
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer_script %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="{% static 'jquery-ui/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript">
+    $(function() {
+        var dateFormat = "mm/dd/yyyy",
+            from = $( "#id_start_date" )
+                .datepicker({
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                })
+                .on( "change", function() {
+                    to.datepicker( "option", "minDate", getDate( this ) );
+                }),
+            to = $( "#id_end_date" )
+                .datepicker({
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                })
+                .on( "change", function() {
+                    from.datepicker( "option", "maxDate", getDate( this ) );
+                });
+
+        var start_date = "{{start_date}}";
+        var end_date = "{{end_date}}";
+        console.log(start_date);
+        if (start_date.length > 4) {
+            from.datepicker('setDate', new Date(start_date));
+        }
+        if (end_date.length > 4) {
+            to.datepicker('setDate', new Date(end_date));
+        }
+
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+            return date;
+        }
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Sector</th>
+            <th>Country</th>
+            <th>Website</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for company in company_list %}
+            <tr style="cursor: pointer;" data-redirect="{{ company.get_absolute_url }}" onclick="visit_stock(this)">
+                <td>{{ company.name }}</td>
+                <td>{{ company.symbol }}</td>
+                <td>{{ company.sector }}</td>
+                <td>{{ company.country }}</td>
+                <td><a href="{{ company.website }}">{{ company.website }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block footer_script %}
+    <script type="text/javascript">
+        function visit_stock(elem) {
+            console.log(elem);
+            location.replace(elem.getAttribute('data-redirect'));
+        }
+    </script>
+{% endblock %}

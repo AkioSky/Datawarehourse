@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from Financialmarket import views
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home)
-]
+                  path('admin/', admin.site.urls),
+                  path('', views.home, name='company-list'),
+                  path('gold-price/', views.gold_price_page, name='gold-price'),
+                  path('stock/<int:company_id>/', views.company_stock, name='company-stock'),
+                  path('404/', views.page_not_found, name='page-not-found')
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -108,11 +108,12 @@ def gold_price_page(request):
 
     print(start_date)
     print(end_date)
+    start_date_min = start_date - timedelta(130)
 
     form = MonthYearSelectForm()
 
     df = pd.DataFrame(list(GoldPrice.objects.
-                           filter(date__range=[start_date, end_date])
+                           filter(date__range=[start_date_min, end_date])
                            .values('date', 'price')
                            .order_by('-date')[::-1]))
     df['SMA(5)'] = df['price'].rolling(5).mean()

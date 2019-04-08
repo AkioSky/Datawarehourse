@@ -53,6 +53,7 @@
         var end_date = "{{end_date}}";
         console.log(start_date);
         if (start_date.length > 4) {
+            console.log(new Date(start_date));
             from.datepicker('setDate', new Date(start_date));
         }
         if (end_date.length > 4) {

@@ -1,13 +1,19 @@
+amqp==1.4.9
+anyjson==0.3.3
 backports.csv==1.0.7
+billiard==3.3.0.23
 cchardet==2.1.4
 certifi==2019.3.9
 chardet==3.0.4
 Click==7.0
+crontab==0.22.5
 cycler==0.10.0
 datapackage==1.5.1
 decorator==4.4.0
 defusedxml==0.5.0
 Django==2.1.7
+django-celery==3.2.2
+django-crontab==0.7.1
 et-xmlfile==1.0.1
 fix-yahoo-finance==0.0.22
 idna==2.8
@@ -20,6 +26,7 @@ jsonpointer==1.14
 jsonschema==2.6.0
 jupyter-core==4.4.0
 kiwisolver==1.0.1
+kombu==3.0.37
 linear-tsv==1.1.0
 lxml==4.3.3
 matplotlib==3.0.3

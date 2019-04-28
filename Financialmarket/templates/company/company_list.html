@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <form class="form-inline md-form form-group-sm" method="get" action="">
+        <input type="text" name="search" class="ui-icon-search form-control form-control-sm mr-3">
+        <button class="searchbutton" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>

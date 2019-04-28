@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="get" class="flex-container" style="justify-content: flex-start">
+    <form action="" method="get" class="flex-container form-inline" style="justify-content: flex-start">
     {% for field in form %}
         {{ field }}
     {% endfor %}
-        <button class="btn">Submit</button>
+        <button class="btn btn-primary">Submit</button>
     </form>
 {% if graph %}
     <div class="section">
@@ -59,6 +59,9 @@
         if (end_date.length > 4) {
             to.datepicker('setDate', new Date(end_date));
         }
+
+        var sma_days = document.getElementById('id_sma_days');
+        sma_days.value = {{ sma_days }};
 
         function getDate( element ) {
             var date;

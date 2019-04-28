@@ -12,6 +12,7 @@ end = datetime.now()
 
 def get(tickers, startdate, enddate):
     def data(ticker):
+        print(ticker)
         return (pdr.get_data_yahoo(ticker, start=startdate, end=enddate))
     datas = map(data, tickers)
     try:
@@ -24,28 +25,38 @@ def get(tickers, startdate, enddate):
 def get_basic_finance():
     companies = CompanyInfo.objects.all()
     tickers = []
+    #for company in companies:
+    #    tickers.append(company.symbol)
+    #print(tickers)
+
+    #all_data = get(tickers, start, end)
+    #print(all_data)
     for company in companies:
-        tickers.append(company.symbol)
-    print(tickers)
+        try:
+            all_data = pdr.get_data_yahoo(company.symbol, start=start, end=end)
+            #print(all_data)
+            if all_data is not None:
+                print(company.symbol)
+                all_data.reset_index(level=['Date'], inplace=True)
 
-    all_data = get(tickers, start, end)
-    if all_data is not None:
-        all_data.reset_index(level=['Date'], inplace=True)
-
-        for company in companies:
-            df = all_data.loc[company.symbol]
-            #print(df.head())
-            for index, row in df.iterrows():
-                StockPrice.objects.create(
-                    company=company,
-                    open=row['Open'],
-                    close=row['Close'],
-                    high=row['High'],
-                    low=row['Low'],
-                    volume=row['Volume'],
-                    adj_close=row['Adj Close'],
-                    date=row['Date']
-                )
+                #for company in companies:
+                #df = all_data.loc[company.symbol]
+                df = all_data
+                print(df.head())
+                for index, row in df.iterrows():
+                    StockPrice.objects.create(
+                        company=company,
+                        open=row['Open'],
+                        close=row['Close'],
+                        high=row['High'],
+                        low=row['Low'],
+                        volume=row['Volume'],
+                        adj_close=row['Adj Close'],
+                        date=row['Date']
+                    )
+        except:
+            print('failed - {}'.format(company.symbol))
+            pass
 
 
 def read_gold_prices():

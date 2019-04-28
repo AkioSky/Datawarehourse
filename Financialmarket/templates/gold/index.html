@@ -57,6 +57,9 @@
                     from.datepicker( "option", "maxDate", getDate( this ) );
                 });
 
+        var sma_days = document.getElementById('id_sma_days');
+        sma_days.value = {{ sma_days }};
+
         var start_date = "{{start_date}}";
         var end_date = "{{end_date}}";
         console.log(start_date);

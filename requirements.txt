@@ -3,7 +3,7 @@ anyjson==0.3.3
 backports.csv==1.0.7
 billiard==3.3.0.23
 cchardet==2.1.4
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 crontab==0.22.5
